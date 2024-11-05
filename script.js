@@ -33,7 +33,7 @@ const sensitiveContent = `
 function revealSensitiveInfo() {
     const password = prompt("Enter the password to reveal sensitive information:");
 
-    if (password === "test") {
+    if (password === "sergej") {
         
         document.getElementById("sensitive-info").innerHTML = sensitiveContent;
 
