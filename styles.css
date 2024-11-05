@@ -1,0 +1,188 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Set to full viewport height */
+    overflow-y: auto; /* Allow vertical scrolling */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: flex-start; /* Align items to the start vertically */
+}
+
+.background {
+    position: fixed; /* Keep the background fixed */
+    top: 50%;
+    left: 50%;
+    width: 550px; /* Adjust size as needed */
+    height: 250px; /* Adjust size as needed */
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgb(49, 119, 248), rgb(0, 255, 179));
+    filter: blur(170px); /* Blur effect for the background */
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Prevent mouse events on the background */
+    transition: transform 0.1s; /* Smooth transition for rotation */
+    z-index: 0; /* Ensure it's behind the content */
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center; /* Center sections horizontally */
+    z-index: 1; /* Ensure it stays above the background */
+    margin-top: 20px; /* Add some top margin for spacing */
+}
+
+h2 {
+    margin-top: 0;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+a:hover {
+    color: #00c3ff; /* Subtle color change */
+    border-bottom: 1px solid #00c3ff; /* Underline on hover */
+}
+
+.sensitive-info {
+    display: none;
+}
+
+/* Modern button styling */
+#reveal-button {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#reveal-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.experience-title {
+    font-weight: bold;
+    font-size: 1.1em; /* Slightly larger font size */
+    margin-bottom: 5px; /* Space below the title */
+}
+
+.experience-company {
+    font-style: italic; /* Italicize the company name */
+    color: #ccc; /* Light color for company name */
+    margin-bottom: 15px; /* Space below the company name */
+}
+
+.experience-bullet {
+    margin-left: 20px; /* Indent bullet points */
+    position: relative; /* Position relative for custom bullets */
+}
+
+.experience-bullet:before {
+    content: '•'; /* Custom bullet */
+    color: #00c3ff; /* Bullet color */
+    position: absolute; /* Position it relative to the bullet */
+    left: -15px; /* Position to the left of the text */
+}
+
+.education-title {
+    font-weight: bold;
+    margin-top: 10px; /* Space between title and previous content */
+    font-size: 18px; /* Slightly larger font size for titles */
+}
+
+.education-institution {
+    margin: 5px 0; /* Space above and below the institution name */
+    font-size: 16px; /* Slightly smaller font size for institution */
+    color: #ccc; /* A lighter color for better differentiation */
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 90deg;
+    inherits: true;
+  }
+  
+  @property --gradX {
+    syntax: '<percentage>';
+    initial-value: 50%;
+    inherits: true;
+  }
+  
+  @property --gradY {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: true;
+  }
+
+  :root {
+	--d: 2500ms;
+	--angle: 90deg;
+	--gradX: 100%;
+	--gradY: 50%;
+	--c1: rgba(168, 239, 255, 1);
+	--c2: rgba(168, 239, 255, 0.1);
+}
+
+.background {
+	min-width: min(40rem, 100%);
+}
+
+.section {
+    width: 80%;
+    max-width: 600px; /* Ensure sections don't get too wide */
+    padding: 20px;
+    margin: 20px 0; /* Vertical spacing between sections */
+    border: 3px solid transparent; /* Start with a transparent border */
+    background-color: rgba(17, 17, 17, 0.39); /* Semi-transparent background for blur effect */
+    backdrop-filter: blur(20px); /* Stronger blur effect for sections */
+    position: relative; /* Needed for the absolute positioning of the shine effect */
+    overflow: hidden; /* Hide the overflow of the shine effect */
+    transition: transform 0.3s; /* Smooth transition for grow effect */
+	border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+	animation: borderRotate var(--d) linear infinite forwards;
+}
+
+.section:nth-child(6) {
+	border-image: radial-gradient(ellipse at var(--gradX) var(--gradY), var(--c1), var(--c1) 10%, var(--c2) 40%) 30;
+	animation: borderRadial var(--d) linear infinite forwards;
+}
+
+@keyframes borderRotate {
+	100% {
+		--angle: 420deg;
+	}
+}
+
+@keyframes borderRadial {
+	20% {
+		--gradX: 100%;
+		--gradY: 50%;
+	}
+	40% {
+		--gradX: 100%;
+		--gradY: 100%;
+	}
+	60% {
+		--gradX: 50%;
+		--gradY: 100%;
+	}
+	80% {
+		--gradX: 0%;
+		--gradY: 50%;
+	}
+	100% {
+		--gradX: 50%;
+		--gradY: 0%;
+	}
+}
